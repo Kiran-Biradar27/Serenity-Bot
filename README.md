@@ -75,9 +75,6 @@ cd ../frontend
 npm install
 npm start
 ```
-
-> ⚠️ Make sure to set up your `.env` files for both frontend and backend with the required API keys and environment variables.
-
 ---
 
 ## 🤝 Contributions
