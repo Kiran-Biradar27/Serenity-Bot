@@ -27,7 +27,7 @@ Whether you're looking to talk through your thoughts, understand your moods bett
   Leverage face-api.js to detect facial expressions and understand emotional signals from your face.
 
 - **Smart Recommendations**  
-  Receive curated self-help articles, exercises, and techniques based on your emotional patterns.
+  Receive curated self-help articles, games , exercises, and techniques based on your emotional patterns.
 
 - **Authentication & Privacy**  
   Your data stays protected through secure login and JWT-based authentication.
@@ -54,14 +54,14 @@ Whether you're looking to talk through your thoughts, understand your moods bett
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
-```bash
+```
 git clone https://github.com/Kiran-Biradar27/Serenity-Bot.git
 cd Serenity-Bot
 ````
 
 ### 2. Setup Backend
 
-```bash
+```
 cd backend
 npm install
 npm run build
@@ -70,7 +70,7 @@ npm start  # or: npm run dev
 
 ### 3. Setup Frontend
 
-```bash
+```
 cd ../frontend
 npm install
 npm start
