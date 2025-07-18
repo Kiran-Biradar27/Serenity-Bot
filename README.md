@@ -1,12 +1,7 @@
 # Serenity-Bot
-Thanks! Based on your friend's `README.md`, here’s a **customized, unique version** for your own Serenity-Bot project. It keeps the same professional structure but uses different wording and styling while reflecting the same features.
-
----
 
 ````markdown
 # 🌿 Serenity-Bot: Your Personal AI Wellness Partner
-
-![Serenity Banner](path-to-your-banner-image-if-any)
 
 Serenity-Bot is a modern AI-powered mental wellness platform designed to offer emotional support, mood tracking, and tailored resources — all within a user-friendly interface.
 
