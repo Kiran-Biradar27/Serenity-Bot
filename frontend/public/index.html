@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <!-- Handle webpack-dev-server WebSocket errors - load this first -->
+    <script src="%PUBLIC_URL%/websocket-interceptor.js"></script>
+    <title>SerenityBot - Mental Health Companion</title>
+    <!-- Load face-api.js from CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <!-- Check model structure if in development mode -->
+    <script defer src="%PUBLIC_URL%/models-check.js"></script>
+    <!-- Load models script -->
+    <script defer src="%PUBLIC_URL%/models-loader.js"></script>
+    <!-- Test face detection tool (development only) -->
+    <script defer src="%PUBLIC_URL%/models-test.js"></script>
+    <!-- Handle webpack-dev-server WebSocket errors -->
+    <script>
+      // Suppress WebSocket connection errors from webpack-dev-server
+      (function() {
+        // Store the original console.error function
+        const originalConsoleError = console.error;
+        
+        // Override console.error to filter out WebSocket connection error messages
+        console.error = function(...args) {
+          // Check if this is a WebSocket error from webpack-dev-server (port 3000)
+          const errorString = args.join(' ');
+          if (errorString.includes('WebSocket connection to \'ws://localhost:3000/ws\'') && 
+              errorString.includes('failed')) {
+            // Development-only WebSocket error, don't show it
+            console.log('Development WebSocket warning suppressed (webpack-dev-server hot reload)');
+            return;
+          }
+          
+          // Otherwise, pass through to the original console.error
+          originalConsoleError.apply(console, args);
+        };
+        
+        // Also override the WebSocket constructor to handle connection errors gracefully
+        const OriginalWebSocket = window.WebSocket;
+        window.WebSocket = function(url, protocols) {
+          const ws = new OriginalWebSocket(url, protocols);
+          
+          // If this is a webpack-dev-server WebSocket (port 3000), handle errors silently
+          if (url.includes('localhost:3000/ws')) {
+            ws.onerror = function(event) {
+              console.log('Development WebSocket error handled (webpack-dev-server)');
+            };
+          }
+          
+          return ws;
+        };
+        window.WebSocket.prototype = OriginalWebSocket.prototype;
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
